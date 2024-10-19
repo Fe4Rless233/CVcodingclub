@@ -1,9 +1,12 @@
+/* General styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    animation: fadeIn 1.5s ease-in-out;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
@@ -18,14 +21,27 @@ header img {
     margin-bottom: 10px;
 }
 
+/* Navigation Styles */
 nav {
     background-color: #333;
-    overflow: hidden;
-    animation: slideIn 1s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-nav a {
-    float: left;
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px; /* Adds space between navigation items */
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
     display: block;
     color: white;
     text-align: center;
@@ -34,50 +50,97 @@ nav a {
     transition: background-color 0.3s ease;
 }
 
-nav a:hover {
+nav ul li a:hover {
     background-color: #ddd;
     color: black;
-    animation: pulse 0.6s;
 }
 
+nav ul li .active {
+    text-decoration: underline;
+}
+
+/* Dropdown styles */
+nav ul li ul.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #333;
+    min-width: 200px;
+    z-index: 1;
+}
+
+nav ul li:hover ul.dropdown {
+    display: block;
+}
+
+nav ul li ul.dropdown li {
+    width: 100%;
+}
+
+nav ul li ul.dropdown li a {
+    padding: 12px 20px;
+    display: block;
+    color: white;
+}
+
+nav ul li ul.dropdown li a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Section content */
 section {
     padding: 2em;
     margin: auto;
     max-width: 800px;
-    opacity: 0;
-    animation: fadeInSection 1.5s ease-in-out forwards;
+    flex: 1;  /* Allows section to grow and push footer down */
 }
 
 footer {
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 0px;
-    position: fixed;
+    padding: 10px;
     width: 100%;
-    bottom: 0;
+    margin-top: auto;  /* Pushes the footer to the bottom */
 }
 
-.competition-logo {
-    width: 150px;
-    display: block;
-    margin: 20px auto;
+/* Mobile view */
+@media only screen and (max-width: 600px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px; /* Reduces space between nav items for mobile */
+    }
+
+    nav ul li {
+        width: 100%;
+    }
+
+    .dropdown {
+        position: relative;
+    }
+
+    nav ul li a {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    section {
+        padding: 1em;
+        font-size: 16px;
+    }
+
+    header img {
+        width: 80px;
+    }
 }
 
+/* Animations */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
-}
-
-@keyframes slideIn {
-    from { transform: translateX(-100%); }
-    to { transform: translateX(0); }
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
 }
 
 @keyframes fadeInSection {
